@@ -17,11 +17,9 @@ RUN apt-get update && apt-get install -y vim python perl wget procps && \
 	mv apache-hive-$HIVE_VERSION-bin hive && \
 	wget https://jdbc.postgresql.org/download/postgresql-9.4.1209.jre7.jar -O $HIVE_HOME/lib/postgresql-jdbc.jar && \
 	rm apache-hive-$HIVE_VERSION-bin.tar.gz && \
-	apt-get --purge remove -y wget && \
-	apt-get clean && \
 	rm -rf /var/lib/apt/lists/*
 
-RUN apt-get install -y python2.7-dev \
+RUN apt-get update && apt-get install -y python2.7-dev \
     make \
     libkrb5-dev \
     libxml2-dev \
