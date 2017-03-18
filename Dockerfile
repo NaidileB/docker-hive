@@ -31,16 +31,14 @@ RUN apt-get install -y python2.7-dev \
     libssl-dev \
     libldap2-dev \
     python-pip \
-    ant gcc g++ libkrb5-dev libffi-dev libmysqlclient-dev libssl-dev libsasl2-dev libsasl2-modules-gssapi-mit libsqlite3-dev libtidy-0.99-0 libxml2-dev libxslt-dev make libldap2-dev maven python-dev python-setuptools libgmp3-dev
+    ant git gcc g++ libkrb5-dev libffi-dev libmysqlclient-dev libssl-dev libsasl2-dev libsasl2-modules-gssapi-mit libsqlite3-dev libtidy-0.99-0 libxml2-dev libxslt-dev make libldap2-dev maven python-dev python-setuptools libgmp3-dev
 
-RUN python /root/hue/tools/virtual-bootstrap/virtual-bootstrap.py \
-        -qq --no-site-packages /root/hue/build/env && ln -s /usr/lib/python2.7/plat-*/_sysconfigdata_nd.py /usr/lib/python2.7/
+RUN cd /root && git clone https://github.com/cloudera/hue.git && cd hue 
 
-RUN cd /root && git clone https://github.com/cloudera/hue.git && cd hue &&  ./build/env/bin/hue runserver
 RUN python2.7 /root/hue/tools/virtual-bootstrap/virtual-bootstrap.py \
         -qq --no-site-packages /root/hue/build/env && make apps
 
-RUN  ./build/env/bin/hue runserver &
+CMD  ./build/env/bin/hue runserver &
 
 
 #Spark should be compiled with Hive to be able to use it
