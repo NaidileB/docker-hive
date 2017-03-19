@@ -33,10 +33,10 @@ RUN apt-get update && apt-get install -y python2.7-dev \
 
 RUN cd /root && git clone https://github.com/cloudera/hue.git && cd hue 
 
-RUN python2.7 /root/hue/tools/virtual-bootstrap/virtual-bootstrap.py \
-        -qq --no-site-packages /root/hue/build/env && cd /root/hue/ && make apps
+#RUN python2.7 /root/hue/tools/virtual-bootstrap/virtual-bootstrap.py \
+#        -qq --no-site-packages /root/hue/build/env && cd /root/hue/ && make apps
 
-CMD  ./build/env/bin/hue runserver &
+#CMD  ./build/env/bin/hue runserver &
 
 
 #Spark should be compiled with Hive to be able to use it
