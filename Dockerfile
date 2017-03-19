@@ -31,7 +31,7 @@ RUN apt-get update && apt-get install -y python2.7-dev \
     python-pip \
     ant git gcc g++ libkrb5-dev libffi-dev libmysqlclient-dev libssl-dev libsasl2-dev libsasl2-modules-gssapi-mit libsqlite3-dev libtidy-0.99-0 libxml2-dev libxslt-dev make libldap2-dev maven python-dev python-setuptools libgmp3-dev
 
-RUN cd /root && git clone https://github.com/cloudera/hue.git && cd hue 
+RUN cd /root && git clone https://github.com/cloudera/hue.git && cd hue && make apps
 
 #RUN python2.7 /root/hue/tools/virtual-bootstrap/virtual-bootstrap.py \
 #        -qq --no-site-packages /root/hue/build/env && cd /root/hue/ && make apps
