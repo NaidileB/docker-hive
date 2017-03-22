@@ -43,8 +43,13 @@ services:
   hive-metastore:
     build: .
     container_name: hive-metastore
+    ports:
+     -  9083:9083
     env_file:
       - ./hadoop-hive.env
+    volumes:
+      - ./data/hive:/hive_data
+      - ./data/hive/hive_docker_data:/user/hive
     command: /opt/hive/bin/hive --service metastore
   hive-metastore-postgresql:
     restart: always
@@ -53,3 +58,15 @@ services:
      - 5432:5432
     volumes:
       - ./data/db:/var/lib/postgresql
+  presto:
+   restart: always
+   image: zhicwu/presto
+   ports:
+      - 8080:8080
+      - 8081:8081
+      - 8082:8082
+   volumes:
+     - ./data/hive:/hive_data
+     - ./data/hive/hive_docker_data:/user/hive
+     - ./data/etc:/presto/etc
+     - ./data/data:/presto/data
